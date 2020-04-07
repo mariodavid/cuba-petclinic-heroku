@@ -33,6 +33,6 @@ jobs:
 
 
       - name: Run tests
-        run: ./gradlew test -Dspring.profiles.active=test
+        run: ./gradlew test -i -Dspring.profiles.active=test
         env:
           JDBC_DATABASE_URL: jdbc:postgresql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/cuba
