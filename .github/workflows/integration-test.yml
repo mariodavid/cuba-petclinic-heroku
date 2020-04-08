@@ -31,6 +31,9 @@ jobs:
         with:
           java-version: 1.8
 
+      - name: Print postgres port
+        run: echo "${{ job.services.postgres.ports[5432] }}"
+
 
       - name: Run tests
         run: ./gradlew createDb --debug && ./gradlew test --debug
