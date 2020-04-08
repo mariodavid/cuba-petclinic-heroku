@@ -33,7 +33,7 @@ jobs:
 
 
       - name: Run tests
-        run: ./gradlew createDb && ./gradlew test -i
+        run: ./gradlew createDb --debug && ./gradlew test --debug
         env:
           JDBC_DATABASE_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports[5432] }}/petclinic-heroku?user=postgres&password=postgres
           DATABASE_PORT: ${{ job.services.postgres.ports[5432] }}
