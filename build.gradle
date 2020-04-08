@@ -65,8 +65,7 @@ configure([globalModule, coreModule, webModule]) {
 
     test {
         useJUnitPlatform()
-
-//        systemProperty "spring.profiles.active", System.getProperty("spring.profiles.active")
+        environment 'JDBC_DATABASE_URL', System.getenv("JDBC_DATABASE_URL") ?: "jdbc:postgresql://localhost:5432/petclinic-heroku?user=postgres&password=postgres"
     }
 }
 

@@ -33,6 +33,6 @@ jobs:
 
 
       - name: Run tests
-        run: ./gradlew test -i -Dspring.profiles.active=test
+        run: ./gradlew createDb && ./gradlew test -i
         env:
-          JDBC_DATABASE_URL: jdbc:postgresql://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/cuba
+          JDBC_DATABASE_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports[5432] }}/petclinic-heroku?user=postgres&password=postgres
