@@ -65,9 +65,6 @@ configure([globalModule, coreModule, webModule]) {
 
     test {
         useJUnitPlatform()
-//        environment 'JDBC_DATABASE_URL', System.getenv("JDBC_DATABASE_URL") ?: "jdbc:postgresql://localhost:5432/petclinic-heroku?user=postgres&password=postgres"
-        println "hello JDBC_DA: " + System.getenv("JDBC_DATABASE_URL")
-        systemProperty 'spring.profiles.active', 'integrationtest'
     }
 }
 
@@ -114,7 +111,6 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        host = 'localhost:' +  System.getenv("DATABASE_PORT")
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
