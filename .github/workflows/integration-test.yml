@@ -39,9 +39,9 @@ jobs:
         run: ./gradlew createDb --info && ./gradlew test --info
         env:
           SPRING_PROFILES_ACTIVE: integrationtest
-          JDBC_DATABASE_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports[5432] }}/petclinic-heroku?user=postgres&password=postgres
+          JDBC_DATABASE_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports[5432] }}/petclinic-heroku-test?user=postgres&password=postgres
           DATABASE_USERNAME: postgres
           DATABASE_PASSWORD: postgres
-          DATABASE_DB_NAME: petclinic-heroku
+          DATABASE_DB_NAME: petclinic-heroku-test
           DATABASE_HOST: localhost
           DATABASE_PORT: ${{ job.services.postgres.ports[5432] }}
