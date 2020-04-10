@@ -1,4 +1,4 @@
-name: Gradle Build
+name: Run CI pipeline
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  vm-jobs:
+  run-ci:
     runs-on: ubuntu-latest
 
     services:
@@ -18,12 +18,11 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: petclinic-heroku
         ports:
-          # will assign a random free host port
           - 5432/tcp
-        # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
+      - name: Git Checkout
       - uses: actions/checkout@v1
 
       - name: Set up JDK 1.8
@@ -42,7 +41,7 @@ jobs:
           DATABASE_PORT: ${{ job.services.postgres.ports[5432] }}
 
 
-      - name: Run Integrationtests
+      - name: Run Integration Tests
         run: ./gradlew test
         env:
           # JDBC_DATASOURCE_URL is used for the execution of gradle task 'test'.
