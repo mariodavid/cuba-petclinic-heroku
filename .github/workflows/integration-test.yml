@@ -42,15 +42,8 @@ jobs:
 
 
       - name: Run Integration Tests
-        run: ./gradlew test --scan
+        run: ./gradlew test
         env:
           # JDBC_DATASOURCE_URL is used for the execution of gradle task 'test'.
           # The application uses this ENV variable for the 'integrationtest' spring profile (see integrationtest-app.properties)
           JDBC_DATABASE_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports[5432] }}/petclinic-heroku-test?user=postgres&password=postgres
-
-          # DATABASE_* ENV variables are used for the gradle task 'createIntegrationtestDb' - which sets up the test database
-          DATABASE_USERNAME: postgres
-          DATABASE_PASSWORD: postgres
-          DATABASE_DB_NAME: petclinic-heroku-test
-          DATABASE_HOST: localhost
-          DATABASE_PORT: ${{ job.services.postgres.ports[5432] }}

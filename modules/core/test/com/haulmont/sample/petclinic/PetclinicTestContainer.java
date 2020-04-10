@@ -19,6 +19,7 @@ public class PetclinicTestContainer extends TestContainer {
         ));
         appPropertiesFiles = Arrays.asList(
                 "com/haulmont/sample/petclinic/app.properties",
+                "com/haulmont/sample/petclinic/integrationtest-app.properties",
                 "com/haulmont/sample/petclinic/test-app.properties"
         );
 
