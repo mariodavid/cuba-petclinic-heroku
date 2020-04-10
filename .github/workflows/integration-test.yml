@@ -18,7 +18,9 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: petclinic-heroku
         ports:
+          # will assign a random free host port
           - 5432/tcp
+        # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
@@ -29,8 +31,12 @@ jobs:
         with:
           java-version: 1.8
 
+      - name: Print postgres port
+        run: echo "${{ job.services.postgres.ports[5432] }}"
+
+
       - name: Run tests
-        run: ./gradlew createIntegrationtestDb && ./gradlew -Dspring.profiles.active=integrationtest test
+        run: ./gradlew createIntegrationtestDb --info && ./gradlew test --info
         env:
           # JDBC_DATASOURCE_URL is used for the execution of gradle task 'test'.
           # The application uses this ENV variable for the 'integrationtest' spring profile (see integrationtest-app.properties)
