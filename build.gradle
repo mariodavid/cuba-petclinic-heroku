@@ -65,6 +65,10 @@ configure([globalModule, coreModule, webModule]) {
 
     test {
         useJUnitPlatform()
+
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
     }
 }
 
