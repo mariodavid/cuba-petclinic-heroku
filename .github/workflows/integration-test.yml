@@ -32,7 +32,7 @@ jobs:
           java-version: 1.8
 
       - name: Setup Test Database Structure
-        run: ./gradlew -q createIntegrationtestDb
+        run: ./gradlew createIntegrationtestDb
         env:
           # DATABASE_* ENV variables are used for the gradle task 'createIntegrationtestDb' - which sets up the test database
           DATABASE_USERNAME: postgres
@@ -43,7 +43,7 @@ jobs:
 
 
       - name: Run Integrationtests
-        run: ./gradlew -q test
+        run: ./gradlew test
         env:
           # JDBC_DATASOURCE_URL is used for the execution of gradle task 'test'.
           # The application uses this ENV variable for the 'integrationtest' spring profile (see integrationtest-app.properties)
