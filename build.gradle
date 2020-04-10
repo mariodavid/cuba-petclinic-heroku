@@ -113,6 +113,14 @@ configure(coreModule) {
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
     }
 
+    task createIntegrationtestDb(dependsOn: assembleDbScripts, description: 'Creates database for Integrationtests', type: CubaDbCreation) {
+        dbms = 'postgres'
+        dbName = System.getenv('DATABASE_DB_NAME')
+        dbUser = System.getenv('DATABASE_USERNAME')
+        dbPassword = System.getenv('DATABASE_PASSWORD')
+        host = System.getenv('DATABASE_HOST') + ':' + System.getenv('DATABASE_PORT')
+    }
+
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
     }
 }
