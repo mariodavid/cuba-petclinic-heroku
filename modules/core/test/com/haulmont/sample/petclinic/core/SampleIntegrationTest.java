@@ -47,7 +47,7 @@ public class SampleIntegrationTest {
             query.setParameter("userLogin", "admin");
             List<User> users = query.getResultList();
             tx.commit();
-            assertEquals(2, users.size());
+            assertEquals(1, users.size());
         }
     }
 }
