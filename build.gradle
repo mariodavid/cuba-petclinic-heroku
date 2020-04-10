@@ -226,3 +226,10 @@ task stage(dependsOn: ['setupTomcat', ":${modulePrefix}-core:deploy", ":${module
         webProperties.text = ''' cuba.webContextName = / '''
     }
 }
+
+if (hasProperty('buildScan')) {
+    buildScan {
+        termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+        termsOfServiceAgree = 'yes'
+    }
+}

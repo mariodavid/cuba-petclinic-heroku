@@ -42,7 +42,7 @@ jobs:
 
 
       - name: Run Integration Tests
-        run: ./gradlew test
+        run: ./gradlew test --scan
         env:
           # JDBC_DATASOURCE_URL is used for the execution of gradle task 'test'.
           # The application uses this ENV variable for the 'integrationtest' spring profile (see integrationtest-app.properties)
