@@ -33,6 +33,7 @@ jobs:
       - name: Setup Test Database Structure
         run: ./gradlew createIntegrationtestDb
         env:
+          SPRING_PROFILES_ACTIVE: integrationtest
           # DATABASE_* ENV variables are used for the gradle task 'createIntegrationtestDb' to set up the database (see build.gradle)
           DATABASE_USERNAME: postgres
           DATABASE_PASSWORD: postgres
@@ -44,5 +45,6 @@ jobs:
       - name: Run Integration Tests
         run: ./gradlew test
         env:
+          SPRING_PROFILES_ACTIVE: integrationtest
           # The application uses this ENV variable for the 'integrationtest' spring profile (see integrationtest-app.properties)
           JDBC_DATABASE_URL: jdbc:postgresql://localhost:${{ job.services.postgres.ports[5432] }}/petclinic-heroku-test?user=postgres&password=postgres
