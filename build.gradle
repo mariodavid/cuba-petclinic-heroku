@@ -226,3 +226,8 @@ task stage(dependsOn: ['setupTomcat', ":${modulePrefix}-core:deploy", ":${module
         webProperties.text = ''' cuba.webContextName = / '''
     }
 }
+task buildUberJar(type: CubaUberJarBuilding) {
+    logbackConfigurationFile = 'etc/uber-jar-logback.xml'
+    singleJar = true
+    appProperties = ['cuba.automaticDatabaseUpdate': true]
+}
