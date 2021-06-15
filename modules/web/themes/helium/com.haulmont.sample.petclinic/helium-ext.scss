@@ -131,6 +131,22 @@
   }
 
 
+
+  .petclinic-environment-name {
+    background-color: var(--dark-purple);
+    color: white !important;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .petclinic-environment-name::before {
+    font-family: FontAwesome;
+    content: '\f135';
+    padding-right: 10px;
+  }
+
+
   .v-calendar-month-day-today .v-calendar-event,
   .v-calendar-month-day-today .v-calendar-event .v-calendar-event-time,
   .v-calendar-month-day-today .v-calendar-bottom-spacer {
