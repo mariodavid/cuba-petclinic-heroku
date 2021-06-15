@@ -1,12 +1,14 @@
 package com.haulmont.sample.petclinic.web.pet.pet;
 
-import com.haulmont.cuba.core.global.Metadata;
-import com.haulmont.cuba.gui.Notifications;
-import com.haulmont.cuba.gui.Screens;
+import com.haulmont.cuba.gui.Route;
 import com.haulmont.cuba.gui.components.Action;
-import com.haulmont.cuba.gui.components.GroupTable;
-import com.haulmont.sample.petclinic.entity.pet.Pet;
+import com.haulmont.cuba.gui.components.LookupField;
+import com.haulmont.cuba.gui.components.Slider;
+import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.screen.*;
+import com.haulmont.sample.petclinic.entity.owner.Owner;
+import com.haulmont.sample.petclinic.entity.pet.Pet;
+import com.haulmont.sample.petclinic.entity.pet.PetType;
 
 import javax.inject.Inject;
 
@@ -14,48 +16,28 @@ import javax.inject.Inject;
 @UiDescriptor("pet-browse.xml")
 @LookupComponent("petsTable")
 @LoadDataBeforeShow
+@Route("pets")
 public class PetBrowse extends StandardLookup<Pet> {
 
     @Inject
-    protected Notifications notifications;
+    protected Slider birthDateFilterField;
 
     @Inject
-    protected Metadata metadata;
+    protected TextField<String> idFilterField;
 
     @Inject
-    protected GroupTable<Pet> petsTable;
+    protected LookupField<Owner> ownerFilterField;
 
-    @Subscribe("petsTable.calculateDiscount")
-    public void calculateDiscount(Action.ActionPerformedEvent actionPerformedEvent) {
+    @Inject
+    protected LookupField<PetType> typeFilterField;
 
-        Pet pet = petsTable.getSingleSelected();
 
-        int discount = calculateDiscount(pet);
-
-        showDiscountCalculatedNotification(pet, discount);
+    @Subscribe("petsTable.clearFilter")
+    protected void onPetsTableClearFilter(Action.ActionPerformedEvent event) {
+        typeFilterField.setValue(null);
+        ownerFilterField.setValue(null);
+        idFilterField.setValue(null);
+        birthDateFilterField.setValue(null);
     }
 
-
-    private void showDiscountCalculatedNotification(Pet pet, int discount) {
-
-        String petName = metadata.getTools().getInstanceName(pet);
-
-        String discountMessage = "Discount for " + petName + ": " + discount + "%";
-
-        notifications.create(Notifications.NotificationType.TRAY)
-                .withCaption(discountMessage)
-                .show();
-    }
-
-    private int calculateDiscount(Pet pet) {
-        int discount = 0;
-
-        int visitAmount = pet.getVisits().size();
-        if (visitAmount > 5) {
-            discount = 5;
-        } else if (visitAmount > 2) {
-            discount = 2;
-        }
-        return discount;
-    }
 }

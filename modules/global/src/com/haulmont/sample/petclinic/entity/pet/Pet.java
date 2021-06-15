@@ -3,12 +3,10 @@ package com.haulmont.sample.petclinic.entity.pet;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.sample.petclinic.entity.NamedEntity;
 import com.haulmont.sample.petclinic.entity.owner.Owner;
-import com.haulmont.sample.petclinic.entity.visit.Visit;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @NamePattern("%s - %s|identificationNumber,name")
 @Table(name = "PETCLINIC_PET", uniqueConstraints = {
@@ -22,12 +20,8 @@ public class Pet extends NamedEntity {
     @Column(name = "IDENTIFICATION_NUMBER", nullable = false)
     protected String identificationNumber;
 
-    @OneToMany(mappedBy = "pet")
-    protected List<Visit> visits;
-
-    @Temporal(TemporalType.DATE)
     @Column(name = "BIRTH_DATE")
-    protected Date birthDate;
+    protected LocalDate birthDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TYPE_ID")
@@ -37,12 +31,12 @@ public class Pet extends NamedEntity {
     @JoinColumn(name = "OWNER_ID")
     protected Owner owner;
 
-    public List<Visit> getVisits() {
-        return visits;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public void setVisits(List<Visit> visits) {
-        this.visits = visits;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     public void setIdentificationNumber(String identificationNumber) {
@@ -69,11 +63,4 @@ public class Pet extends NamedEntity {
         return type;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
 }

@@ -26,7 +26,7 @@ in a video tutorial, that you can also take a look at:
 This example shows how to easily deploy the Petclinic application to Heroku. Heroku is a PaaS offering, that allows to
 have a very easy and frictionless experience when it comes to running applications in production. Compared to other
 cloud providers and solutions, Heroku is very high level in its building blocks. This means that the application developer
-that just wants to "host a CUBA application" somewhere, can achieve that goal with very little "heavy lifting" on the 
+that just wants to "host a CUBA application" somewhere, can achieve that goal with very little "heavy lifting" on the
 operations side.
 
 In this example I will guide you through the Steps that are necessary to deploy the Petclinic project to Heroku.
@@ -36,10 +36,10 @@ In this example I will guide you through the Steps that are necessary to deploy 
 The first step is that you have both a Heroku and a Github Account. Luckily both of them are free, so there is no problem here.
 Also running the application on Heroku for demo purposes is free, which gives you the ability to play around with it.
 
-The reason I chose Github is, that the source code integration from Github to Heroku is as seamless as it can be. 
+The reason I chose Github is, that the source code integration from Github to Heroku is as seamless as it can be.
 
-In that respect all three choices: `CUBA`, `Github` and `Heroku` allow you as the application developer to focus on the most 
-important thing: 
+In that respect all three choices: `CUBA`, `Github` and `Heroku` allow you as the application developer to focus on the most
+important thing:
 
 > Focus on your business application
 
@@ -51,7 +51,7 @@ After creating the accounts in both services, you will see the Heroku dashboard,
 
 The first step is to put your CUBA application source code into Github source control. If you want to have a quick start
 you can use the fork button on this repository, which will create a copy of this example app under you own name that
-you can use for the tutorial. 
+you can use for the tutorial.
 
 ![1 - Fork github repository](img/1-fork-github-repository.png)
 
@@ -86,17 +86,17 @@ In order to run a CUBA app, it needs a Database. Heroku has tight integration fo
 is to create an add-on in the "Resources" Tab. Just search for "Postgres" and select the "Hobby" plan, which is free as well.
 
 ![6 - Attached Postgres DB add-on](img/6-attached-postgres-db-addon.png)
-  
+
 
 ### Step 7: Configure the CUBA application
 
 Now everything is setup on the Heroku and Github side. What needs to be done is some small adjustments on the source code
-of the CUBA app itself, in order to run nicely in the Heroku environment. 
+of the CUBA app itself, in order to run nicely in the Heroku environment.
 
-CUBA 7.2 in particular introduced some nice enhancements in the configuration option, that makes the integration even easier. 
-In particular we will use a production Spring profile, to configure the Database connection. 
+CUBA 7.2 in particular introduced some nice enhancements in the configuration option, that makes the integration even easier.
+In particular we will use a production Spring profile, to configure the Database connection.
 Also we will use the ability to let CUBA read in the database credentials from an environment variable, which Heroku automatically
-creates for us. 
+creates for us.
 
 #### Step 7.1: Help Heroku to Build the CUBA app
 
@@ -170,7 +170,7 @@ cuba.dataSource.jdbcUrl = ${JDBC_DATABASE_URL}
 #### Step 7.3: Help Heroku run the CUBA app
 
 In order for Heroku to know what it needs to do when it comes to running the application, the source code can define
-the action it should do. For that, we create a file with the name `Procfile` in the root directory of the application 
+the action it should do. For that, we create a file with the name `Procfile` in the root directory of the application
 (see: [Procfile](Procfile)). It contains the following information:
 
 ```
