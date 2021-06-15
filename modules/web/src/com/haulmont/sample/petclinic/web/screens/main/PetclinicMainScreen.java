@@ -2,10 +2,12 @@ package com.haulmont.sample.petclinic.web.screens.main;
 
 import com.haulmont.addon.helium.web.theme.HeliumThemeVariantsManager;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.Messages;
 import com.haulmont.cuba.core.global.Security;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Action.ActionPerformedEvent;
 import com.haulmont.cuba.gui.components.Button;
+import com.haulmont.cuba.gui.components.Label;
 import com.haulmont.cuba.gui.components.Timer.TimerActionEvent;
 import com.haulmont.cuba.gui.components.mainwindow.SideMenu;
 import com.haulmont.cuba.gui.components.mainwindow.SideMenu.MenuItem;
@@ -19,6 +21,7 @@ import com.haulmont.cuba.gui.screen.UiController;
 import com.haulmont.cuba.gui.screen.UiDescriptor;
 import com.haulmont.cuba.security.global.UserSession;
 import com.haulmont.cuba.web.app.main.MainScreen;
+import com.haulmont.sample.petclinic.config.PetclinicEnvironmentConfig;
 import com.haulmont.sample.petclinic.entity.visit.Visit;
 import com.haulmont.sample.petclinic.web.screens.visit.MyVisits;
 
@@ -47,6 +50,12 @@ public class PetclinicMainScreen extends MainScreen {
     protected Button switchThemeModeBtn;
     @Inject
     protected MessageBundle messageBundle;
+    @Inject
+    private Label<String> welcomeLabel;
+    @Inject
+    private PetclinicEnvironmentConfig petclinicEnvironmentConfig;
+    @Inject
+    private Messages messages;
 
     @Subscribe
     protected void initMainMenu(AfterShowEvent event) {
@@ -59,6 +68,12 @@ public class PetclinicMainScreen extends MainScreen {
 
         initMenuIcons();
 
+        welcomeLabel.setValue(
+                messageBundle.formatMessage(
+                        "welcomeMsg",
+                        petclinicEnvironmentConfig.getEnvironmentName()
+                )
+        );
     }
 
     private void initMenuIcons() {

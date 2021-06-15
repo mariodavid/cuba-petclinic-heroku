@@ -11,6 +11,7 @@
         <cssLayout>
             <workArea>
                 <initialLayout>
+                    <label id="welcomeLabel" align="TOP_RIGHT" stylename="h2"/>
                     <image align="BOTTOM_CENTER">
                         <theme path="branding/petclinic_logo_with_slogan.svg"/>
                     </image>
